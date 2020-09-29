@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+
+    <title>Weather App Nodejs</title>
+  </head>
+  <body>
+    <div class="box">
+      <div class="wave -one"></div>
+      <div class="wave -two"></div>
+      <div class="wave -three"></div>
+
+      <div id="weathercon">
+        <i class="fas fa-sun" style="color: #eccc68"></i>
+      </div>
+
+      <div class="info">
+        <h2 class="location">
+          <i class="fas fa-street-view" style="color: #ff1397"></i>{%location%},
+          {%country%}
+        </h2>
+        <p id="date">WED | Nov 23 | 10:49AM</p>
+        <h1 class="temp">{%tempval%}</h1>
+        <h3 class="tempmin_max">Min {%tempmin%} | Max {%tempmax%}</h3>
+      </div>
+    </div>
+
+    <script>
+      const currDate = document.getElementById("date");
+      let weatherConditon = document.getElementById("weathercon");
+
+      const tempStatus = "clouds";
+
+      const getCurrDay = () => {
+        let currTime = new Date();
+
+        let weekDays = new Array(7);
+
+        weekDays[0] = "Sun";
+        weekDays[1] = "Mon";
+        weekDays[2] = "Tue";
+        weekDays[3] = "Wed";
+        weekDays[4] = "Thu";
+        weekDays[5] = "Fri";
+        weekDays[6] = "Sat";
+
+        let day = weekDays[currTime.getDay()];
+        // console.log(currDay)
+        return day;
+      };
+
+      // getCurrDay();
+
+      const getCurrTime = () => {
+        var months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "June",
+          "July",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+
+        var now = new Date();
+        var month = months[now.getMonth()];
+        var date = now.getDate();
+
+        let hours = now.getHours();
+        let min = now.getMinutes();
+
+        let per = "AM";
+
+        if (hours > 11) {
+          per = "PM";
+          if (hours > 12) hours -= 12;
+        }
+
+        if (min < 10) {
+          min = "0" + min;
+        }
+        // console.log(hours + ":" + min + " " + peroids);
+
+        return `${month} ${date} | ${hours} : ${min} ${per}`;
+      };
+
+      // getCurrTime();
+
+      currDate.innerHTML = getCurrDay() + " | " + getCurrTime();
+    </script>
+  </body>
+</html>
